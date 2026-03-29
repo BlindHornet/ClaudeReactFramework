@@ -1,24 +1,6 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(npm run *)",
-      "Bash(git add *)",
-      "Bash(git commit *)",
-      "Bash(git status)",
-      "Bash(git diff *)",
-      "Bash(git log *)",
-      "Bash(git branch *)",
-      "Bash(git checkout *)",
-      "Bash(git stash *)",
-      "Bash(git fetch *)",
-      "Bash(git pull *)",
-      "Read(*)",
-      "Bash(ls*)",
-      "Bash(cat*)",
-      "Bash(find*)",
-      "Bash(grep*)",
-      "Bash(make*)"
-    ],
+    "allow": ["Bash(*)", "Read(*)", "Write(*)", "Edit(*)"],
     "deny": [
       "Read(./.env)",
       "Read(./.env.*)",
