@@ -81,3 +81,10 @@
 - @memory/gotchas.md — known traps
 - @memory/schema.md — database structure
 - @memory/patterns.md — when touching data
+
+**Update rules:**
+
+- `memory/schema.md` — when any Firestore collection, field, or relationship changes
+- `memory/patterns.md` — when a new reusable pattern is established or an existing one changes
+- `memory/gotchas.md` — when a new bug or trap is discovered, or after any correction is made
+- `memory/decisions.md` — when an architectural decision is made or an existing one is reversed
