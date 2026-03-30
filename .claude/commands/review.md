@@ -1,56 +1,47 @@
-# /review
+---
+allowed-tools: Bash(git diff:*), ReadFile, ls
+description: High-intensity technical audit of staged changes
+---
 
-You are doing a code quality review before this work ships. Read the files
-that were changed, then check each category below.
+## Your Task
 
-## React
+Perform a cold, analytical review of the current `git diff`. You are a Senior Full-Stack Engineer. Do not provide praise. If the code is perfect, output "No issues found" and stop.
 
-- No hooks called conditionally or inside loops
-- useEffect has correct dependency arrays — no missing deps, no infinite loops
-- No unnecessary re-renders — large lists or expensive values should use useMemo/useCallback
-- No prop drilling more than 2 levels deep — suggest context or composition instead
-- All async operations inside useEffect have cleanup functions where needed
+### React & Logic
 
-## TypeScript
+- **Hooks:** No conditional calls or loops. `useEffect` must have exhaustive dependency arrays.
+- **Cleanup:** Async operations in `useEffect` must have a cleanup or abort controller.
+- **Performance:** Expensive calculations must be wrapped in `useMemo`.
+- **Prop Drilling:** No drilling deeper than 2 levels; suggest Context or Composition.
 
-- No `any` types
-- All function params and return types are explicit
-- No non-null assertions (`!`) without a comment explaining why
-- Interfaces preferred over inline object types for reusable shapes
+### TypeScript (Strict Mode)
 
-## Tailwind CSS v4
+- **No `any`:** Zero exceptions. Use `unknown` or a proper Interface if the shape is dynamic.
+- **Explicitness:** All function parameters and return types must be explicit.
+- **Assertions:** No `!` non-null assertions without a `// @ts-ignore` or explanatory comment.
 
-- No deprecated v3 syntax (`bg-opacity-*`, `ring-opacity-*`, `divide-opacity-*`, etc.)
-- No inline styles when a utility class exists
-- No hardcoded color values outside of the `@theme` block in CSS
-- Responsive variants used correctly (`sm:`, `md:`, `lg:`)
+### Tailwind CSS v4 & UI
 
-## General Code Quality
+- **Syntax:** Flag any v3 legacy classes (e.g., `text-opacity-*`). Use v4 color opacity (e.g., `text-black/50`).
+- **Theming:** No hardcoded HEX/RGB. Use `@theme` variables (e.g., `text-primary`).
+- **Standards:** No inline `style={{}}` attributes where a utility class exists.
 
-- No `console.log` left in production code
-- No hardcoded strings that should be constants or env vars
-- No dead code — unused variables, imports, or functions
-- Error states and loading states are handled, not silently ignored
-- No magic numbers without a named constant explaining what they are
+### Supabase & Security
 
-## Security
+- **Auth:** Ensure `supabase.auth.getSession()` or `getUser()` is used correctly in protected routes.
+- **Secrets:** Flag any `anon_key` or `service_role` strings. Use `import.meta.env.VITE_SUPABASE_*`.
+- **Leakage:** Check for `console.log` or `debugger` statements.
 
-- No secrets, API keys, or credentials in source code
-- Environment variables use `import.meta.env.VITE_*` prefix (not `process.env`)
-- No `dangerouslySetInnerHTML` without sanitization
+### Structure
 
-## File & Structure
-
-- New components are in the correct folder (`components/` for reusable UI, `features/` for scoped logic)
-- Named exports used — no default exports unless required by the framework
-- Test file exists alongside the component if logic is non-trivial
+- **Exports:** Use **Named Exports** (`export function ...`) only. No `export default`.
+- **Location:** Components must be in `src/components/` or `src/features/`.
+- **Test:** If a new helper function is added, ask for a corresponding `.test.ts` file.
 
 ## Output Format
 
-Give a numbered list of issues found. For each one:
+Numbered list only.
 
-- File name and line reference if possible
-- What the problem is
-- What the fix should be
+1. [File Name : Line #] - [The problem] - [The specific fix].
 
-If nothing is wrong, say "No issues found" and stop. No praise, no summary.
+If perfect: "No issues found." and stop. No praise, no summary.
