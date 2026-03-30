@@ -3,7 +3,7 @@
 **Stack:** React 18 + Vite 5 + Javascript + Tailwind CSS v4
 **State:** [Zustand / Context API]
 **Data Fetching:** [TanStack Query / plain fetch]
-**Routing:** [React Router v6 / TanStack Router]
+**Routing:** React Router v6
 **Testing:** Vitest + React Testing Library
 
 ### 1. Code Organization
@@ -80,7 +80,6 @@
 - @memory/patterns.md — component patterns
 - @memory/gotchas.md — known traps
 - @memory/schema.md — database structure
-- @memory/patterns.md — when touching data
 
 **Update rules:**
 
