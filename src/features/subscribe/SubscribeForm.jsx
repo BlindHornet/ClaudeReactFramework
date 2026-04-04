@@ -1,6 +1,5 @@
 import { useSubscribe } from '@/hooks/useSubscribe'
 import { Button } from '@/components/ui/Button'
-import { Input } from '@/components/ui/Input'
 
 export function SubscribeForm() {
   const { email, setEmail, status, errorMsg, submit } = useSubscribe()
@@ -19,19 +18,20 @@ export function SubscribeForm() {
 
   return (
     <div className="w-full max-w-lg mx-auto">
-      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
-        <Input
+      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row">
+        <input
           type="email"
           placeholder="your@email.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={isDisabled}
-          className="flex-1"
+          className="flex-1 px-4 py-3 bg-near-black border-2 border-field-light sm:border-r-0 text-white placeholder:text-smoke focus:outline-none focus:border-foreman transition-colors duration-150 disabled:opacity-50"
         />
         <Button
           type="submit"
           variant="primary"
           disabled={isDisabled}
+          className="sm:rounded-l-none"
         >
           {buttonLabel}
         </Button>
@@ -39,7 +39,7 @@ export function SubscribeForm() {
 
       {status === 'success' && (
         <p className="mt-3 text-sm text-foreman text-center">
-          You're in. Check your inbox — the next issue drops soon.
+          You&apos;re in. Check your inbox — the next issue drops soon.
         </p>
       )}
 
