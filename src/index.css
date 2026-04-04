@@ -22,8 +22,8 @@
 }
 
 body {
-  background-color: #111827;
+  background-color: var(--color-field);
   color: #f9fafb;
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body);
   line-height: 1.6;
 }
