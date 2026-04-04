@@ -1,40 +1,51 @@
-import { Card } from '@/components/ui/Card'
-import { Badge } from '@/components/ui/Badge'
-import { Button } from '@/components/ui/Button'
 import { formatDate } from '@/utils/formatDate'
 
-export function NewsletterCard({ newsletter }) {
-  return (
-    <div className="border-l-4 border-transparent hover:border-foreman transition-colors">
-      <Card hover={true} className="h-full">
-        <div className="text-5xl mb-4">{newsletter.coverEmoji}</div>
+function parseIssueNumber(id) {
+  const match = id.match(/(\d+)$/)
+  return match ? `#${match[1].padStart(3, '0')}` : null
+}
 
-        <div className="mb-2">
-          <Badge variant="default">{formatDate(newsletter.date)}</Badge>
+export function NewsletterCard({ newsletter }) {
+  const issueNumber = parseIssueNumber(newsletter.id)
+
+  return (
+    <div className="bg-field-mid border-l-4 border-field-light hover:border-foreman transition-colors duration-200 hover:-translate-y-1 transition-transform">
+      <div className="p-7 h-full flex flex-col">
+        <div className="flex items-center gap-3 mb-4">
+          {issueNumber && (
+            <span className="font-display text-xs uppercase tracking-widest text-foreman bg-foreman/10 border border-foreman/30 px-2 py-0.5">
+              Issue {issueNumber}
+            </span>
+          )}
+          <span className="text-smoke text-xs">{formatDate(newsletter.date)}</span>
         </div>
 
-        <h3 className="font-display text-white font-semibold text-xl mb-2">
+        <h3 className="font-display text-white font-semibold text-lg leading-snug mb-3">
           {newsletter.title}
         </h3>
 
-        <p className="text-smoke text-sm leading-relaxed mb-4">
+        <p className="text-smoke text-sm leading-relaxed mb-4 flex-1">
           {newsletter.blurb}
         </p>
 
-        <div className="mb-4">
+        <div className="flex flex-wrap gap-2 mb-5">
           {newsletter.tags.map((tag) => (
-            <Badge key={tag} variant="default" className="mr-2 mb-1">
+            <span
+              key={tag}
+              className="text-smoke/70 text-xs uppercase tracking-wider border border-field-light px-2 py-0.5"
+            >
               {tag}
-            </Badge>
+            </span>
           ))}
         </div>
 
-        <a href={newsletter.readUrl}>
-          <Button variant="ghost" size="sm">
-            Read Issue
-          </Button>
+        <a
+          href={newsletter.readUrl}
+          className="font-display text-xs uppercase tracking-widest text-foreman hover:text-foreman-light transition-colors"
+        >
+          Read Issue →
         </a>
-      </Card>
+      </div>
     </div>
   )
 }
