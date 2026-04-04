@@ -9,7 +9,7 @@ export function NewsletterCard({ newsletter }) {
   const issueNumber = parseIssueNumber(newsletter.id)
 
   return (
-    <div className="bg-field-mid border-l-4 border-field-light hover:border-foreman transition-colors duration-200 hover:-translate-y-1 transition-transform">
+    <div className="bg-field-mid border-l-4 border-field-light hover:border-foreman hover:-translate-y-1 transition-all duration-200">
       <div className="p-7 h-full flex flex-col">
         <div className="flex items-center gap-3 mb-4">
           {issueNumber && (
