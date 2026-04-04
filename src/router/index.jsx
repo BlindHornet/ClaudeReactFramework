@@ -1,6 +1,9 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Outlet } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import { NotFoundPage } from '@/pages/NotFoundPage'
+import { Navbar } from '@/components/layout/Navbar'
+import { Footer } from '@/components/layout/Footer'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
 
 const HomePage = lazy(() => import('@/pages/HomePage').then(m => ({ default: m.HomePage })))
 const ArchivePage = lazy(() => import('@/pages/ArchivePage').then(m => ({ default: m.ArchivePage })))
@@ -26,20 +29,24 @@ function withSuspense(Component) {
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: withSuspense(HomePage),
+    element: (
+      <ErrorBoundary>
+        <div className="min-h-screen flex flex-col bg-field">
+          <Navbar />
+          <main className="flex-1">
+            <Outlet />
+          </main>
+          <Footer />
+        </div>
+      </ErrorBoundary>
+    ),
     errorElement: <NotFoundPage />,
-  },
-  {
-    path: '/archive',
-    element: withSuspense(ArchivePage),
-  },
-  {
-    path: '/shop',
-    element: withSuspense(ShopPage),
-  },
-  {
-    path: '/partner',
-    element: withSuspense(PartnerPage),
+    children: [
+      { index: true, element: withSuspense(HomePage) },
+      { path: 'archive', element: withSuspense(ArchivePage) },
+      { path: 'shop', element: withSuspense(ShopPage) },
+      { path: 'partner', element: withSuspense(PartnerPage) },
+    ],
   },
   {
     path: '*',
