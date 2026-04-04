@@ -21,6 +21,7 @@ export function SubscribeForm() {
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row">
         <input
           type="email"
+          aria-label="Email address"
           placeholder="your@email.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}

@@ -11,6 +11,7 @@ export function HeroSection() {
     >
       {/* Scanline texture */}
       <div
+        aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
@@ -20,6 +21,7 @@ export function HeroSection() {
 
       {/* Amber radial glow */}
       <div
+        aria-hidden="true"
         className="absolute pointer-events-none"
         style={{
           top: '20%',

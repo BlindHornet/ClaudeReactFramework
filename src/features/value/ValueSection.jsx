@@ -39,6 +39,7 @@ export function ValueSection() {
               className="bg-field p-8 relative group border-t-2 border-transparent hover:border-foreman transition-colors duration-300"
             >
               <div
+                aria-hidden="true"
                 className="font-display font-bold text-white/5 leading-none mb-4 select-none"
                 style={{ fontSize: '64px' }}
               >
