@@ -4,24 +4,46 @@ import { Button } from '@/components/ui/Button'
 export function HeroSection() {
   return (
     <section
-      className="min-h-screen bg-field flex items-center justify-center"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
       style={{
-        backgroundImage: `
-          linear-gradient(135deg, rgba(217,119,6,0.03) 25%, transparent 25%),
-          linear-gradient(225deg, rgba(217,119,6,0.03) 25%, transparent 25%),
-          linear-gradient(315deg, rgba(217,119,6,0.03) 25%, transparent 25%),
-          linear-gradient(45deg, rgba(217,119,6,0.03) 25%, transparent 25%)
-        `,
-        backgroundSize: '60px 60px',
+        background: 'linear-gradient(135deg, #1a1006 0%, #111827 40%, #0f1a0f 100%)',
       }}
     >
-      <div className="max-w-3xl mx-auto text-center px-4">
-        <span className="inline-block text-foreman text-xs font-display uppercase tracking-widest mb-6 border border-foreman/30 px-3 py-1 rounded-btn">
-          Weekly AI Tips
+      {/* Scanline texture */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.18) 2px, rgba(0,0,0,0.18) 4px)',
+        }}
+      />
+
+      {/* Amber radial glow */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          top: '20%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '700px',
+          height: '500px',
+          background:
+            'radial-gradient(ellipse at center, rgba(217,119,6,0.18), transparent 70%)',
+        }}
+      />
+
+      <div className="relative max-w-4xl mx-auto text-center px-4 py-20">
+        <span className="inline-block text-foreman text-xs font-display uppercase tracking-widest mb-6 border border-foreman/30 px-3 py-1 bg-foreman/5">
+          Weekly AI Tips for the Trades
         </span>
 
-        <h1 className="font-display text-5xl md:text-6xl lg:text-7xl uppercase font-bold text-white leading-tight mb-6">
-          AI Tips for People Who Actually Work for a Living
+        <h1
+          className="font-display uppercase font-bold text-white leading-tight mb-6"
+          style={{ fontSize: 'clamp(42px, 7vw, 80px)', letterSpacing: '2px' }}
+        >
+          AI Tips for People Who{' '}
+          <span className="text-foreman-light">Actually Work</span>{' '}
+          for a Living
         </h1>
 
         <p className="text-smoke text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
@@ -35,7 +57,7 @@ export function HeroSection() {
             </Button>
           </a>
           <Link to="/archive">
-            <Button variant="ghost" size="lg">
+            <Button variant="outline" size="lg">
               Browse Issues
             </Button>
           </Link>
