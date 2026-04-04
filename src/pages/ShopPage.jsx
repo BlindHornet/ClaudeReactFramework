@@ -1,3 +1,15 @@
+import { ShopHero } from '@/features/shop/ShopHero'
+import { ProductGrid } from '@/features/shop/ProductGrid'
+import { SubscribeSection } from '@/features/subscribe/SubscribeSection'
+
 export function ShopPage() {
-  return <div>Shop Page</div>
+  return (
+    <>
+      <ShopHero />
+      <div className="py-12 px-4">
+        <ProductGrid />
+      </div>
+      <SubscribeSection />
+    </>
+  )
 }
