@@ -42,6 +42,8 @@
 - `/plan` - Create implementation plan
 - `/review` - Review code quality
 - `/fix` - Fix build errors
+- `/write_tests` - Write tests for the provided argument
+- `/commit` - Commit the changes via git rules
 
 ## Architecture
 

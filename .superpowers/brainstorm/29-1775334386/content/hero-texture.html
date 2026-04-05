@@ -1,0 +1,72 @@
+<h2>What should the hero background look like?</h2>
+<p class="subtitle">Right now it's a nearly invisible diagonal pattern (opacity 0.03). For the rugged industrial feel on a full-bleed hero, pick a treatment.</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="grid" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0;overflow:hidden;border-radius:6px;min-height:140px;">
+      <div style="
+        background-color:#111827;
+        background-image:
+          linear-gradient(rgba(217,119,6,0.12) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(217,119,6,0.12) 1px, transparent 1px);
+        background-size:40px 40px;
+        min-height:140px;
+        display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;
+      ">
+        <div style="width:30px;height:3px;background:#d97706;margin-bottom:8px;"></div>
+        <div style="color:#f9fafb;font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:2px;text-align:center;">AI Tips for People<br/>Who Actually Work</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Blueprint Grid</h3>
+      <p>Fine amber grid lines — like engineering blueprints or graph paper. Industrial, precise, technical. Pairs well with the trades theme.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="halftone" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0;overflow:hidden;border-radius:6px;min-height:140px;">
+      <div style="
+        background-color:#111827;
+        background-image: radial-gradient(rgba(217,119,6,0.18) 1px, transparent 1px);
+        background-size:20px 20px;
+        min-height:140px;
+        display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;
+      ">
+        <div style="width:30px;height:3px;background:#d97706;margin-bottom:8px;"></div>
+        <div style="color:#f9fafb;font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:2px;text-align:center;">AI Tips for People<br/>Who Actually Work</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Halftone Dots</h3>
+      <p>Amber dot grid fading into the dark. Feels like vintage print / screen printing. Gritty, tactile, trade-press aesthetic.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="noise" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0;overflow:hidden;border-radius:6px;min-height:140px;">
+      <div style="
+        background: linear-gradient(135deg, #1a1006 0%, #111827 40%, #0f1a0f 100%);
+        min-height:140px;
+        display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;
+        position:relative;overflow:hidden;
+      ">
+        <div style="position:absolute;inset:0;background:repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(0,0,0,0.15) 2px,
+          rgba(0,0,0,0.15) 4px
+        );"></div>
+        <div style="position:absolute;top:-40px;left:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(217,119,6,0.15),transparent 70%);"></div>
+        <div style="position:relative;width:30px;height:3px;background:#d97706;margin-bottom:8px;"></div>
+        <div style="position:relative;color:#f9fafb;font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:2px;text-align:center;">AI Tips for People<br/>Who Actually Work</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Scanline + Amber Glow</h3>
+      <p>Subtle horizontal scanlines with a warm amber radial glow behind the headline. Feels like a work lamp shining on a dark wall — moody, atmospheric, cinematic.</p>
+    </div>
+  </div>
+
+</div>
