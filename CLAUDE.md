@@ -1,6 +1,6 @@
 # Project: [App Name]
 
-**Stack:** React 18 + Vite 5 + Javascript + Tailwind CSS v4
+**Stack:** React 19 + Vite 5 + Javascript + Tailwind CSS v4
 **State:** [Zustand / Context API]
 **Data Fetching:** [TanStack Query / plain fetch]
 **Routing:** React Router v6
@@ -42,22 +42,103 @@
 - `/plan` - Create implementation plan
 - `/review` - Review code quality
 - `/fix` - Fix build errors
+- `/write_tests` - Write tests for the provided argument
+- `/commit` - Commit the changes via git rules
 
 ## Architecture
 
-| Folder            | What goes here                                    |
-| ----------------- | ------------------------------------------------- |
-| `src/components/` | Reusable UI — no business logic, no data fetching |
-| `src/features/`   | Feature-scoped components + hooks (co-located)    |
-| `src/hooks/`      | Shared custom hooks used across features          |
-| `src/utils/`      | Pure functions — no side effects, no React        |
-| `src/config/`     | App configuration, env vars, constants            |
+| Folder            | What goes here                                             |
+| ----------------- | ---------------------------------------------------------- |
+| `src/components/` | Reusable UI — no business logic, no data fetching          |
+| `src/features/`   | Feature-scoped components + hooks (co-located)             |
+| `src/hooks/`      | Shared custom hooks used across features                   |
+| `src/utils/`      | Pure functions — no side effects, no React                 |
+| `src/config/`     | App configuration, env vars, constants                     |
+| `src/layouts/`    | Page shell components (nav + footer wrappers)              |
+| `src/services/`   | API call functions — raw fetch/axios, no React hooks       |
+| `src/assets/`     | SVGs, fonts, images — imported via Vite, not via `public/` |
+| `src/pages/`      | Route-level entry components — one file per route          |
 
 ## Tailwind v4 Rules
 
 - Use CSS custom properties via `@theme` block, NOT `tailwind.config.js`
 - Utility classes only — no arbitrary values unless unavoidable
 - Dark mode: class strategy via `dark:` prefix
+
+## Design Tokens
+
+Define all tokens in `src/index.css` under `@theme`. Never use raw hex values in components.
+
+```css
+@theme {
+  /* Brand */
+  --color-primary: ...;
+  --color-primary-hover: ...;
+  --color-secondary: ...;
+
+  /* Semantic feedback */
+  --color-success: ...;
+  --color-warning: ...;
+  --color-danger: ...;
+  --color-info: ...;
+
+  /* Surfaces */
+  --color-bg: ...;
+  --color-surface: ...;
+  --color-border: ...;
+
+  /* Text */
+  --color-text: ...;
+  --color-text-muted: ...;
+  --color-text-inverse: ...;
+}
+```
+
+- WCAG AA contrast minimum: 4.5:1 for body text, 3:1 for large text and UI components
+- Dark mode token variants defined alongside light tokens — not as afterthoughts
+- Color alone never conveys meaning — pair color with icon or text label
+
+## SEO
+
+### Meta & Document
+
+- Every route needs a unique `<title>` and `<meta name="description">` — use `react-helmet-async`
+- Root `<html>` element must have `lang="en"` (or the app's primary language)
+- Open Graph tags on every public page: `og:title`, `og:description`, `og:image`, `og:url`
+- Twitter card tags: `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`
+- Canonical `<link rel="canonical">` on every page to prevent duplicate content
+
+### Semantic HTML
+
+- One `<h1>` per page — never skip heading levels (h1 then h3 is wrong)
+- Use landmark elements: `<main>`, `<nav>`, `<header>`, `<footer>`, `<section>`, `<article>`
+- Never use a `<div>` or `<span>` where a semantic element fits
+
+### Images
+
+- `alt` text required on every `<img>` — decorative images use `alt=""`
+- `loading="lazy"` on all below-the-fold images
+- Prefer WebP format — provide fallback via `<picture>` if needed
+- Always set explicit `width` and `height` to prevent layout shift (CLS)
+
+### Performance (Core Web Vitals)
+
+- Lazy-load all routes: `React.lazy()` + `<Suspense>`
+- `<link rel="preconnect">` in `index.html` for any external origin (fonts, APIs, CDNs)
+- No layout shift — define dimensions on images and dynamic content containers
+
+### Public Files
+
+- `public/robots.txt` — always create one, even if permissive
+- `public/sitemap.xml` — create for any public-facing app
+
+## Accessibility
+
+- All interactive elements reachable and operable by keyboard alone
+- Focus indicators always visible — never `outline: none` without a visible replacement
+- Icon-only buttons and links require `aria-label`
+- Form inputs always have an associated `<label>` (via `for`/`id` or wrapping)
+- Color alone never conveys meaning — pair with text or icon
 
 ## Coding Standards
 
@@ -87,3 +168,15 @@
 - `memory/patterns.md` — when a new reusable pattern is established or an existing one changes
 - `memory/gotchas.md` — when a new bug or trap is discovered, or after any correction is made
 - `memory/decisions.md` — when an architectural decision is made or an existing one is reversed
+
+Update memory files when: schema changes, new patterns emerge, bugs are discovered, or architectural decisions are made.
+
+## Task Tracking
+
+- `tasks/todo.md` — update whenever a non-trivial task is started, in progress, or completed; write the plan here before touching code
+- `tasks/lessons.md` — update after every correction or mistake with the rule derived from it, so the same error is never repeated
+
+**Update rules:**
+
+- `tasks/todo.md` — add items when new work is identified, mark complete as each step finishes
+- `tasks/lessons.md` — after any correction (wrong approach, bug introduced, misunderstood requirement), log what happened and the rule going forward
