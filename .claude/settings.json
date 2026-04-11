@@ -8,7 +8,7 @@
       "Read(./.aws/**)",
       "Read(**/*.pem)",
       "Read(**/*.key)",
-      "Bash(rm -rf *)",
+      "Bash(rm -rf*)",
       "Bash(git push origin main*)",
       "Bash(git push --force *)",
       "Bash(git push -f *)",
@@ -34,7 +34,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell -NoProfile -Command \"[System.Console]::Beep(800, 300)\""
+            "command": "powershell -NoProfile -WindowStyle Hidden -Command \"for($i=0;$i -lt 3;$i++){ [Console]::Beep(900,150); Start-Sleep -m 80; [Console]::Beep(1200,250); Start-Sleep -m 80 }\""
           }
         ]
       }
