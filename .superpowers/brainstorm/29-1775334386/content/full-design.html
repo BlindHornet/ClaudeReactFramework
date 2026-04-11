@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Field Foreman — Redesign Preview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0d0d0d; color: #f9fafb; font-family: 'Inter', sans-serif; }
+
+  /* --- NAVBAR --- */
+  .navbar {
+    background: #0a0a0a;
+    border-bottom: 2px solid #d97706;
+    padding: 0 32px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .navbar-logo {
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #d97706;
+  }
+  .navbar-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .navbar-links a {
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #9ca3af;
+    text-decoration: none;
+  }
+  .navbar-links a:hover, .navbar-links a.active { color: #d97706; }
+
+  /* --- HERO --- */
+  .hero {
+    min-height: 100vh;
+    background-color: #111827;
+    background: linear-gradient(135deg, #1a1006 0%, #111827 40%, #0f1a0f 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 32px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.18) 2px, rgba(0,0,0,0.18) 4px);
+  }
+  .hero-glow {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(ellipse at center, rgba(217,119,6,0.18), transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; max-width: 860px; }
+  .hero-eyebrow {
+    display: inline-block;
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #d97706;
+    border: 1px solid #d9770650;
+    padding: 5px 14px;
+    margin-bottom: 28px;
+    background: rgba(217,119,6,0.06);
+  }
+  .hero h1 {
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: clamp(42px, 7vw, 80px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1.05;
+    color: #f9fafb;
+    margin-bottom: 24px;
+    text-shadow: 0 2px 40px rgba(0,0,0,0.8);
+  }
+  .hero h1 span { color: #fbbf24; }
+  .hero-sub {
+    font-size: 18px;
+    color: #9ca3af;
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+  .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: #d97706;
+    color: #fff;
+    padding: 14px 32px;
+    border: 2px solid #d97706;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.15s;
+  }
+  .btn-outline {
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: transparent;
+    color: #d97706;
+    padding: 14px 32px;
+    border: 2px solid #d9770660;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .hero-social-proof {
+    margin-top: 32px;
+    font-size: 12px;
+    color: #6b7280;
+    letter-spacing: 1px;
+  }
+
+  /* --- SECTION LABELS --- */
+  .section-label {
+    display: inline-block;
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #d97706;
+    margin-bottom: 16px;
+    border-left: 3px solid #d97706;
+    padding-left: 10px;
+  }
+
+  /* --- VALUE SECTION --- */
+  .value-section {
+    background: #1c1208;
+    padding: 100px 32px;
+    border-top: 1px solid #d9770625;
+  }
+  .value-inner { max-width: 1200px; margin: 0 auto; }
+  .value-header { text-align: center; margin-bottom: 60px; }
+  .value-header h2 {
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: clamp(28px, 4vw, 44px);
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #f9fafb;
+    margin-bottom: 12px;
+  }
+  .value-header p { color: #9ca3af; font-size: 16px; max-width: 500px; margin: 0 auto; }
+  .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .value-card {
+    background: #111827;
+    padding: 36px 32px;
+    border-top: 3px solid transparent;
+    transition: border-color 0.2s;
+    position: relative;
+  }
+  .value-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #d97706;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s;
+  }
+  .value-card:hover::before { transform: scaleX(1); }
+  .value-card-num {
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #d9770618;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .value-card h3 {
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #fbbf24;
+    margin-bottom: 12px;
+  }
+  .value-card p { color: #9ca3af; font-size: 14px; line-height: 1.7; }
+
+  /* --- NEWSLETTER SECTION --- */
+  .newsletter-section {
+    background: #111827;
+    padding: 100px 32px;
+    border-top: 1px solid #374151;
+  }
+  .newsletter-inner { max-width: 1200px; margin: 0 auto; }
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 48px;
+  }
+  .section-header h2 {
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: clamp(24px, 3.5vw, 36px);
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #f9fafb;
+  }
+  .section-header a {
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #d97706;
+    text-decoration: none;
+  }
+  .nl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .nl-card {
+    background: #1f2937;
+    padding: 28px;
+    border-left: 3px solid #374151;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .nl-card:hover { border-left-color: #d97706; transform: translateY(-3px); }
+  .nl-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .nl-issue-num {
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #d97706;
+    background: rgba(217,119,6,0.1);
+    border: 1px solid rgba(217,119,6,0.3);
+    padding: 3px 8px;
+  }
+  .nl-date { font-size: 11px; color: #6b7280; }
+  .nl-card h3 {
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: #f9fafb;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .nl-card p { font-size: 13px; color: #9ca3af; line-height: 1.6; margin-bottom: 16px; }
+  .nl-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
+  .nl-tag {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #6b7280;
+    border: 1px solid #374151;
+    padding: 2px 8px;
+  }
+  .nl-link {
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #d97706;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* --- SUBSCRIBE SECTION --- */
+  .subscribe-section {
+    background: #1c1208;
+    padding: 100px 32px;
+    border-top: 1px solid #d9770625;
+    text-align: center;
+  }
+  .subscribe-inner { max-width: 600px; margin: 0 auto; }
+  .subscribe-rule {
+    width: 48px;
+    height: 3px;
+    background: #d97706;
+    margin: 0 auto 28px;
+  }
+  .subscribe-inner h2 {
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: clamp(24px, 4vw, 40px);
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #f9fafb;
+    margin-bottom: 12px;
+  }
+  .subscribe-inner p { color: #9ca3af; margin-bottom: 32px; font-size: 16px; }
+  .subscribe-form { display: flex; gap: 0; max-width: 480px; margin: 0 auto; }
+  .subscribe-input {
+    flex: 1;
+    background: #0a0a0a;
+    border: 2px solid #374151;
+    border-right: none;
+    color: #f9fafb;
+    padding: 14px 18px;
+    font-size: 14px;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+  }
+  .subscribe-input:focus { border-color: #d97706; }
+  .subscribe-btn {
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: #d97706;
+    color: #fff;
+    border: 2px solid #d97706;
+    padding: 14px 24px;
+    cursor: pointer;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* --- FOOTER --- */
+  .footer {
+    background: #0a0a0a;
+    border-top: 2px solid #d97706;
+    padding: 48px 32px 32px;
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #1f2937;
+    margin-bottom: 24px;
+  }
+  .footer-logo {
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #d97706;
+    margin-bottom: 8px;
+  }
+  .footer-tagline { font-size: 13px; color: #6b7280; }
+  .footer-links { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 4px; }
+  .footer-links a {
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #6b7280;
+    text-decoration: none;
+  }
+  .footer-links a:hover { color: #d97706; }
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #4b5563;
+  }
+
+  /* --- PREVIEW LABEL --- */
+  .preview-banner {
+    background: #d97706;
+    color: #000;
+    text-align: center;
+    padding: 8px;
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<div class="preview-banner">Design Preview — Field Foreman Redesign</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="navbar-logo">Field Foreman</div>
+  <ul class="navbar-links">
+    <li><a href="#" class="active">Home</a></li>
+    <li><a href="#">Archive</a></li>
+    <li><a href="#">Shop</a></li>
+    <li><a href="#">Partner</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Weekly AI Tips for the Trades</span>
+    <h1>AI Tips for People Who <span>Actually Work</span> for a Living</h1>
+    <p class="hero-sub">Field Foreman delivers practical, no-BS AI strategies straight to your inbox every week. Built for the trades. Zero buzzword soup.</p>
+    <div class="hero-actions">
+      <button class="btn-primary">Subscribe Free</button>
+      <button class="btn-outline">Browse Issues</button>
+    </div>
+    <p class="hero-social-proof">Joined by HVAC techs, roofers, landscapers &amp; more</p>
+  </div>
+</section>
+
+<!-- VALUE SECTION -->
+<section class="value-section">
+  <div class="value-inner">
+    <div class="value-header">
+      <div class="section-label">What You're Getting</div>
+      <h2>What You're Actually Getting</h2>
+      <p>Every issue takes under 5 minutes to read and leaves you with something you can use that same week.</p>
+    </div>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="value-card-num">01</div>
+        <h3>Prompts That Actually Work</h3>
+        <p>Real-world AI prompts tested on job site scenarios — writing customer emails, generating quotes, researching parts. Not theory. Actual copy-paste prompts.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-card-num">02</div>
+        <h3>No Fluff, Just Signal</h3>
+        <p>Every issue is 5 minutes max. We cut the buzzword soup and get straight to what matters. Your coffee won't go cold while you're reading.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-card-num">03</div>
+        <h3>Tools You Can Use Monday</h3>
+        <p>Software, extensions, and AI tricks that save real time on real jobs. If it doesn't work for a landscaper or an HVAC tech, we don't cover it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER SECTION -->
+<section class="newsletter-section">
+  <div class="newsletter-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Fresh Off the Press</div>
+        <h2>Recent Issues</h2>
+      </div>
+      <a href="#">See All Issues →</a>
+    </div>
+    <div class="nl-grid">
+      <div class="nl-card">
+        <div class="nl-card-meta">
+          <span class="nl-issue-num">Issue #14</span>
+          <span class="nl-date">Mar 28, 2025</span>
+        </div>
+        <h3>The $0 AI Estimator Every Roofer Needs</h3>
+        <p>Copy-paste prompts for writing estimates in under 10 minutes. No software, no monthly fees, no learning curve.</p>
+        <div class="nl-tags">
+          <span class="nl-tag">Estimating</span>
+          <span class="nl-tag">Prompts</span>
+        </div>
+        <a class="nl-link" href="#">Read Issue →</a>
+      </div>
+      <div class="nl-card">
+        <div class="nl-card-meta">
+          <span class="nl-issue-num">Issue #13</span>
+          <span class="nl-date">Mar 21, 2025</span>
+        </div>
+        <h3>Write Better Customer Emails in 60 Seconds</h3>
+        <p>How HVAC techs are using AI to follow up faster, get more reviews, and stop ghosting leads.</p>
+        <div class="nl-tags">
+          <span class="nl-tag">Communication</span>
+          <span class="nl-tag">HVAC</span>
+        </div>
+        <a class="nl-link" href="#">Read Issue →</a>
+      </div>
+      <div class="nl-card">
+        <div class="nl-card-meta">
+          <span class="nl-issue-num">Issue #12</span>
+          <span class="nl-date">Mar 14, 2025</span>
+        </div>
+        <h3>5 ChatGPT Shortcuts for Landscapers</h3>
+        <p>Seasonal planning, client proposals, and material lists — done faster with AI so you can get back to the job.</p>
+        <div class="nl-tags">
+          <span class="nl-tag">Landscaping</span>
+          <span class="nl-tag">Shortcuts</span>
+        </div>
+        <a class="nl-link" href="#">Read Issue →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBSCRIBE SECTION -->
+<section class="subscribe-section">
+  <div class="subscribe-inner">
+    <div class="subscribe-rule"></div>
+    <h2>Don't Miss the Next One</h2>
+    <p>Join the crew getting smarter every week. Unsubscribe anytime — no hard feelings.</p>
+    <div class="subscribe-form">
+      <input class="subscribe-input" type="email" placeholder="your@email.com" />
+      <button class="subscribe-btn">Join the Crew</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Field Foreman</div>
+      <div class="footer-tagline">AI tips for the people who actually build things.</div>
+    </div>
+    <nav class="footer-links">
+      <a href="#">Home</a>
+      <a href="#">Archive</a>
+      <a href="#">Shop</a>
+      <a href="#">Partner</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2025 Field Foreman. All rights reserved.</span>
+    <span>Privacy Policy &nbsp;|&nbsp; Terms</span>
+  </div>
+</footer>
+
+</body>
+</html>

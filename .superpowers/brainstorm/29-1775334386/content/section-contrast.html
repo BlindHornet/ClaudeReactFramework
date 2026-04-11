@@ -1,0 +1,84 @@
+<h2>How should sections be separated on desktop?</h2>
+<p class="subtitle">Currently all sections are near-identical dark grey — no visual rhythm. Pick a contrast approach.</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="alternating" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0;overflow:hidden;border-radius:6px;">
+      <div style="background:#111827;padding:14px 16px;">
+        <div style="width:30px;height:3px;background:#d97706;margin-bottom:6px;"></div>
+        <div style="color:#f9fafb;font-size:11px;font-weight:700;text-transform:uppercase;">Hero Section</div>
+        <div style="color:#6b7280;font-size:10px;">Full bleed dark</div>
+      </div>
+      <div style="background:#1c1410;padding:14px 16px;border-top:1px solid #d9770630;">
+        <div style="color:#fbbf24;font-size:11px;font-weight:700;text-transform:uppercase;">Value Section</div>
+        <div style="color:#6b7280;font-size:10px;">Warm dark brown-black</div>
+      </div>
+      <div style="background:#111827;padding:14px 16px;border-top:1px solid #374151;">
+        <div style="color:#f9fafb;font-size:11px;font-weight:700;text-transform:uppercase;">Recent Issues</div>
+        <div style="color:#6b7280;font-size:10px;">Back to dark — clear rhythm</div>
+      </div>
+      <div style="background:#1c1410;padding:14px 16px;border-top:1px solid #d9770630;">
+        <div style="color:#fbbf24;font-size:11px;font-weight:700;text-transform:uppercase;">Subscribe</div>
+        <div style="color:#6b7280;font-size:10px;">Warm dark again</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Alternating Warm / Cool</h3>
+      <p>Sections alternate between pure dark (#111827) and a warm dark brown-black. Subtle but creates clear page rhythm without breaking the dark theme.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="dividers" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0;overflow:hidden;border-radius:6px;">
+      <div style="background:#111827;padding:14px 16px;">
+        <div style="color:#f9fafb;font-size:11px;font-weight:700;text-transform:uppercase;">Hero Section</div>
+      </div>
+      <div style="height:3px;background:linear-gradient(90deg,#d97706,#fbbf24,transparent);"></div>
+      <div style="background:#1f2937;padding:14px 16px;">
+        <div style="color:#f9fafb;font-size:11px;font-weight:700;text-transform:uppercase;">Value Section</div>
+      </div>
+      <div style="height:3px;background:linear-gradient(90deg,#d97706,#fbbf24,transparent);"></div>
+      <div style="background:#111827;padding:14px 16px;">
+        <div style="color:#f9fafb;font-size:11px;font-weight:700;text-transform:uppercase;">Recent Issues</div>
+      </div>
+      <div style="height:3px;background:linear-gradient(90deg,#d97706,#fbbf24,transparent);"></div>
+      <div style="background:#1f2937;padding:14px 16px;">
+        <div style="color:#f9fafb;font-size:11px;font-weight:700;text-transform:uppercase;">Subscribe</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Amber Gradient Dividers</h3>
+      <p>Bold amber gradient lines between every section. Sections stay similar dark tones but the dividers create hard visual breaks and reinforce the brand color.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="both" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0;overflow:hidden;border-radius:6px;">
+      <div style="background:#111827;padding:14px 16px;">
+        <div style="color:#f9fafb;font-size:11px;font-weight:700;text-transform:uppercase;">Hero Section</div>
+        <div style="color:#6b7280;font-size:10px;">Pure dark</div>
+      </div>
+      <div style="height:2px;background:linear-gradient(90deg,#d97706,transparent);"></div>
+      <div style="background:#1c1410;padding:14px 16px;">
+        <div style="color:#fbbf24;font-size:11px;font-weight:700;text-transform:uppercase;">Value Section</div>
+        <div style="color:#6b7280;font-size:10px;">Warm dark + divider</div>
+      </div>
+      <div style="height:2px;background:linear-gradient(90deg,#d97706,transparent);"></div>
+      <div style="background:#111827;padding:14px 16px;">
+        <div style="color:#f9fafb;font-size:11px;font-weight:700;text-transform:uppercase;">Recent Issues</div>
+        <div style="color:#6b7280;font-size:10px;">Pure dark + divider</div>
+      </div>
+      <div style="height:2px;background:linear-gradient(90deg,#d97706,transparent);"></div>
+      <div style="background:#1c1410;padding:14px 16px;">
+        <div style="color:#fbbf24;font-size:11px;font-weight:700;text-transform:uppercase;">Subscribe</div>
+        <div style="color:#6b7280;font-size:10px;">Warm dark + divider</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Both — Alternating + Dividers</h3>
+      <p>Maximum separation. Alternating warm/cool backgrounds AND amber dividers between each section. Most dramatic — best for making the page feel alive on a wide monitor.</p>
+    </div>
+  </div>
+
+</div>
