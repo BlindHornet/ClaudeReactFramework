@@ -20,6 +20,8 @@
 - No console.log in production code
 - Proper error handling with try/catch
 - Input validation with Zod or similar
+- No commented-out code — delete it, git history is the record
+- No `TODO` or `FIXME` without an issue number: `// TODO #42: description`
 
 ### 3. Testing
 
@@ -46,6 +48,7 @@
 - `/write_tests` - Write tests for the provided argument
 - `/scaffold [type] [Name]` - Generate boilerplate (component, page, hook, service)
 - `/check [file]` - Audit a file or directory against SEO, a11y, and code rules
+- `/learn` - Capture a correction or lesson and route it to the right file
 - `/commit` - Commit the changes via git rules
 
 ## Architecture
