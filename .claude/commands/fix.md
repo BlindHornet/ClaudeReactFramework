@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(npm run:*), Bash(git diff:*), ReadFile, ls, Bash(grep:*), commit
+allowed-tools: Bash(npm run:*), Bash(git diff:*), Read, Glob, Grep
 description: Autonomous bug identification, root-cause analysis, and resolution
 ---
 
@@ -11,8 +11,8 @@ A bug has been reported. Act as a Debugging Specialist. Identify the failure, tr
 
 1. **Reproduce (MANDATORY):**
    - Run `npm run test` if tests exist
-   - If no tests, inspect logs via `grep`, `ReadFile`, or console output
-   - Identify EXACT failure message before proceeding
+   - If no tests, inspect logs via `Grep`, `Read`, or console output
+   - Identify the EXACT failure message before proceeding
    - DO NOT continue without confirming the failure signal
 
 2. **Trace (Root Cause Analysis):**
@@ -20,9 +20,9 @@ A bug has been reported. Act as a Debugging Specialist. Identify the failure, tr
    - Explain why the current logic fails
    - Classify the issue:
      - State bug (React state, hooks, async)
-     - Data bug (Supabase, API, schema mismatch)
+     - Data bug (API response, schema mismatch, network)
      - UI bug (Tailwind, layout, rendering)
-     - Build/runtime bug (Vite, imports, env)
+     - Build/runtime bug (Vite, imports, env vars)
 
 3. **Fix:**
    - Change ONLY the lines required to resolve the issue
@@ -31,20 +31,19 @@ A bug has been reported. Act as a Debugging Specialist. Identify the failure, tr
 
 4. **Test:**
    - If a related test exists → update or extend it
-   - If no test exists → create a minimal test
-     - Test happy paths
+   - If no test exists → create a minimal test in `__tests__/`
+     - Test happy path
      - Test edge cases
      - Test error states
-   - Focus on testing behavior and public API's rather than implemtnation details.
+   - Focus on behavior and public APIs, not implementation details
+   - Test must FAIL before fix and PASS after fix
 
-- Test must FAIL before fix and PASS after fix
-
-1. **Verify:**
+5. **Verify:**
    - Run `npm run build`
    - Run `npm run test`
-   - If UI-related: verify no console errors and correct rendering
+   - If UI-related: confirm no console errors and correct rendering
 
-2. **Commit:**
+6. **Commit:**
    - Use `/commit`
    - Format: `fix(scope): concise description`
    - Scope must match affected area
@@ -54,7 +53,6 @@ A bug has been reported. Act as a Debugging Specialist. Identify the failure, tr
 - **No Side Quests:** Do not modify unrelated code
 - **No Guessing:** Always identify a real failure signal first
 - **One-Pass Discipline:** Fix one root cause at a time
-- **Supabase Check:** Validate RLS, schema, and network logs for data issues
 - **Environment Awareness:** Ensure fix does not break Vite HMR
 
 ## Output
@@ -64,4 +62,5 @@ Briefly state:
 1. **The Symptom:** What was breaking.
 2. **The Root Cause:** Why it was breaking.
 3. **The Solution:** What you changed.
-   Then, run the commit.
+
+Then run the commit.

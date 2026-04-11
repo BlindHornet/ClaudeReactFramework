@@ -42,7 +42,10 @@
 - `/plan` - Create implementation plan
 - `/review` - Review code quality
 - `/fix` - Fix build errors
+- `/ship` - Lint, build, test, then commit
 - `/write_tests` - Write tests for the provided argument
+- `/scaffold [type] [Name]` - Generate boilerplate (component, page, hook, service)
+- `/check [file]` - Audit a file or directory against SEO, a11y, and code rules
 - `/commit` - Commit the changes via git rules
 
 ## Architecture
@@ -144,7 +147,7 @@ Define all tokens in `src/index.css` under `@theme`. Never use raw hex values in
 
 - Functional components only, no class components
 - Explicit Javascript — no `any`, no implicit returns on complex functions
-- Co-locate tests with components: `Button.test.tsx` next to `Button.tsx`
+- Tests live in a `__tests__/` subfolder next to the source: `src/components/Button/__tests__/Button.test.jsx`
 - Named exports preferred over default exports
 - Error boundaries on every route
 
