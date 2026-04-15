@@ -20,14 +20,14 @@ When you start a new project from this base, Claude already knows the stack, the
 
 ## Stack
 
-| Layer | Choice |
-|-------|--------|
-| Framework | React 18 |
-| Build tool | Vite 5 |
-| Language | JavaScript |
-| Styling | Tailwind CSS v4 |
-| State | React Context + useReducer |
-| Testing | Vitest + React Testing Library |
+| Layer      | Choice                         |
+| ---------- | ------------------------------ |
+| Framework  | React 19                       |
+| Build tool | Vite 5                         |
+| Language   | JavaScript                     |
+| Styling    | Tailwind CSS v4                |
+| State      | React Context + useReducer     |
+| Testing    | Vitest + React Testing Library |
 
 ---
 
@@ -59,32 +59,32 @@ src/
 
 ### Slash Commands
 
-| Command | What it does |
-|---------|-------------|
-| `/plan` | Think through a task, write a phased plan to `tasks/todo.md` before touching code |
-| `/review` | Review code quality, patterns, and correctness |
-| `/fix` | Fix build errors autonomously |
-| `/ship` | Lint, build, test, then commit with a conventional message |
+| Command   | What it does                                                                      |
+| --------- | --------------------------------------------------------------------------------- |
+| `/plan`   | Think through a task, write a phased plan to `tasks/todo.md` before touching code |
+| `/review` | Review code quality, patterns, and correctness                                    |
+| `/fix`    | Fix build errors autonomously                                                     |
+| `/ship`   | Lint, build, test, then commit with a conventional message                        |
 
 ### Memory System
 
 Claude maintains persistent context across sessions in the `memory/` folder:
 
-| File | Contents |
-|------|----------|
+| File                  | Contents                                            |
+| --------------------- | --------------------------------------------------- |
 | `memory/decisions.md` | Architectural choices and the reasoning behind them |
-| `memory/patterns.md` | Reusable patterns established in the project |
-| `memory/gotchas.md` | Known bugs, traps, and lessons learned |
-| `memory/schema.md` | Data shapes, API endpoints, key relationships |
+| `memory/patterns.md`  | Reusable patterns established in the project        |
+| `memory/gotchas.md`   | Known bugs, traps, and lessons learned              |
+| `memory/schema.md`    | Data shapes, API endpoints, key relationships       |
 
 Claude updates these automatically when relevant changes happen.
 
 ### Agents
 
-| Agent | Role |
-|-------|------|
-| `planner` | Architecture planning — reads code, writes phased plans, flags risks |
-| `reviewer` | Read-only code review — quality gates before committing |
+| Agent      | Role                                                                 |
+| ---------- | -------------------------------------------------------------------- |
+| `planner`  | Architecture planning — reads code, writes phased plans, flags risks |
+| `reviewer` | Read-only code review — quality gates before committing              |
 
 ### Settings
 
