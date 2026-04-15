@@ -37,14 +37,11 @@
       "Bash(git push -f *)",
       "Bash(git reset --hard *)"
     ],
-    "defaultMode": "bypassPermissions"
-    /*
-      |  Mode	                |  Behavior
-      |-----------------------|---------------------------------------------
-      |  "default"	          |  Prompts for everything not in the allow list
-      |  "acceptEdits"	      |  Auto-approves edits to existing files, still prompts for new file writes
-      |  "bypassPermissions"	|  Auto-approves everything — no prompts at all
-    */
+    "defaultMode": "acceptEdits",
+    "_comment1": "The defaultMode determines how to handle permissions that are not explicitly allowed or denied. The options are:",
+    "_comment2": "default: Prompts for everything not in the allow list",
+    "_comment3": "acceptEdits: Auto-approves edits to existing files, still prompts for new file writes",
+    "_comment4": "bypassPermissions: Auto-approves everything — no prompts at all"
   },
   "hooks": {
     "PreToolUse": [
