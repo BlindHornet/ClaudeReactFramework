@@ -17,6 +17,12 @@
       "Write(./astro.config.*)"
     ],
     "deny": [
+      "Read(node_modules/*",
+      "Read(dist/**)",
+      "Read(.next/**)",
+      "Read(coverage/**)",
+      "Read(*.lock)",
+
       "Read(./.env)",
       "Read(./.env.*)",
       "Read(./secrets/**)",
@@ -37,6 +43,7 @@
       "Bash(git push -f *)",
       "Bash(git reset --hard *)"
     ],
+    "autocompact_percentage_override": 75,
     "defaultMode": "acceptEdits",
     "_comment1": "The defaultMode determines how to handle permissions that are not explicitly allowed or denied. The options are:",
     "_comment2": "default: Prompts for everything not in the allow list",
@@ -68,6 +75,7 @@
     ]
   },
   "env": {
-    "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
+    "BASH_MAX_OUTPUT_LENGTH": "150000"
   }
 }
